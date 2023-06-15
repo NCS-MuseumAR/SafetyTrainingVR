@@ -9,7 +9,7 @@ public class PlayerInteraction : MonoBehaviour
         if (other.CompareTag("Fire Extinguisher"))
         {
             GameManager gameManager = FindObjectOfType<GameManager>();
-            gameManager.PickUpFireExtinguisher();
+            // gameManager.PickUpFireExtinguisher();
         }
     }
 }

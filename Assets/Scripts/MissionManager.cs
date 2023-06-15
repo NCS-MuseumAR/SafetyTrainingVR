@@ -3,82 +3,91 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/**
+    Mission manager for level 1 only, where all mission managers are managed by Game manager.
+*/
 public class MissionManager : MonoBehaviour
 {
     public GameObject missionPanel;
     public TMP_Text missionDesc;
-    public TimerManager timerManager;
+    
+    public bool isFireExtinguisherPickedUp = false;
+    public bool isFlamePutOut = false;
 
     private List<Mission> missions = new List<Mission>();
+    private string[] missionNames = {"Find and grab the fire extinguisher", "Put out the fire"};
+    
 
-    void Start()
-    {
-        // Add your missions to the list
-        missions.Add(new Mission("Find the fire extinguisher", "Locate the fire extinguisher in the game room"));
-        missions.Add(new Mission("Put out the fire", "Extinguish the fire using the fire extinguisher"));
-
-        // Update the mission panel initially
-        UpdateMissionPanel();
+    void Start() {
+        foreach (string missionName in missionNames) {
+            missions.Add(new Mission(missionName));
+        }
 
         // Start the timer
         // timerManager.StartTimer();
     }
 
-    private void UpdateMissionPanel()
+    void Update() {
+        UpdateMissionPanel();
+        
+        if (isFireExtinguisherPickedUp && isFlamePutOut) {
+            print("level complete");
+        }
+    }
+
+    // Mission 1
+    public void SetFireExtinguisherPickedUp()
     {
+        isFireExtinguisherPickedUp = true;
+        Debug.Log("Mission 1 Complete: " + isMissionCompletedById(0));
+
+    }
+
+    // Mission 2
+    public void SetFlamePutOut()
+    {
+        isFlamePutOut = true;
+        Debug.Log("Mission 2 Complete: " + isMissionCompletedById(1));
+    }
+    
+    private void UpdateMissionPanel() {
         missionDesc.text = "";
+        /* Missions to be dealt with in sequence, to update later */
         foreach (Mission mission in missions)
         {
-            if (mission.isCompleted)
-            {
+            if (mission.isCompleted) {
                 missionDesc.text += $"<s>{mission.missionName}</s>\n";
                 // mission.completionTimeText = timerManager.CalculateCompletionTime();
             }
-            else
-            {
+            else {
                 missionDesc.text += $"{mission.missionName}\n";
             }
         }
     }
 
-    public void CompleteMissionById(int Id)
-    {
-        // Find the mission with the specified id
-        //in the list of "missions" find the Id that belongs to what is called
+    public bool isMissionCompletedById(int Id) {
         Mission mission = missions.Find(m => m.Id == Id);
-        if (mission != null)
-        {
-            // Complete the mission
+        if (mission != null) {
             mission.CompleteMission();
-
-            // Update the mission panel and completion time
             UpdateMissionPanel();
-
-            // Start the timer again
             // timerManager.StartTimer();
+            return true;
         }
+        return false;
     }
 
     public class Mission
-    //every new misssion will have all this values
     {
-        //static int so this mission Id only change inside this class, asssigning original mission Id to 0
         public static int missionId = 0;
-        //Id is just a variable that can be changed
         public int Id;
         public string missionName;
-        public string missionDescription;
         public bool isCompleted;
-        public string completionTimeText;
 
-        public Mission(string name, string description)
+        public Mission(string name)
         {
-            //Id number is called and changed here
             Id = Mission.missionId++;
             missionName = name;
-            missionDescription = description;
             isCompleted = false;
-            // completionTimeText = ""; // Initialize the completion time text
         }
 
         public void CompleteMission()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Flame : MonoBehaviour
-{
+{   
     [SerializeField, Range(0f, 1f)] private float currentIntensity = 1.0f;
     private float[] startIntensities = new float[0];
 
@@ -13,7 +13,7 @@ public class Flame : MonoBehaviour
     [SerializeField] private float regenDelay = 2.5f;
     [SerializeField] private float regenRate = 0.1f;
 
-    [SerializeField] public bool isLit = true;
+    public bool isLit = true;
 
     private void Start() 
     {

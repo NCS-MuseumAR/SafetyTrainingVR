@@ -4,35 +4,27 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class uiControllers : MonoBehaviour
+public class UIControllers : MonoBehaviour
 {
-    public GameObject controlsPanel; // Reference to the ControlsPanel game object
+    public GameObject controlsPanel;
+    public GameObject trainingStartInterface;
+    public GameObject flameEnvironment;
 
-    private void Start()
-    {
-        // Deactivate the controls panel at the start
+    private void Start() {
         controlsPanel.SetActive(false);
+        flameEnvironment.SetActive(false);
     }
 
-    public void StartGame()
-    {
-        // Load the game scene or start the game process
-        SceneManager.LoadScene("MainVRScene");
+    public void StartGame() {
+        trainingStartInterface.SetActive(false);
+        flameEnvironment.SetActive(true);
     }
 
-    public void QuitTraining()
-    {
-        // Code to handle the quit button functionality
-        // Quit the training application or return to the main menu
+    public void QuitTraining() {
         Application.Quit();
     }
         
-    public void ShowInstructions()
-    {
-        // Code to handle the control button functionality
-        // Show a pop-up panel with instructions or additional information
-        // Activate the instructions panel to make it visible
-         // Toggle the visibility of the controls panel
+    public void ShowInstructions() {
         controlsPanel.SetActive(!controlsPanel.activeSelf);
     }
 
@@ -41,16 +33,12 @@ public class uiControllers : MonoBehaviour
     }
 
 
-    public void RestartGame()
-    {
-        // Restart the game
+    public void RestartGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void ReturnToMainMenu()
-    {
-        // Load the main menu scene or go back to the homepage
-        SceneManager.LoadScene("UI For VR Training");
+    public void ReturnToMainMenu() {
+        SceneManager.LoadScene("MainVRScene");
     }
 
 }

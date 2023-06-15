@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/UI For VR Training.unity
-    guid: 1468fa3a96dc742af999f42341cace5a
+    guid: 8885e40b86c9f42eb900261aa2c304c4
   - enabled: 1
     path: Assets/Scenes/MainVRScene.unity
     guid: a92c8a5d216ee4f41bafe28defa5273f
