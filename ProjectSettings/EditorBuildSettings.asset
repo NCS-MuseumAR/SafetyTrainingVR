@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UI For VR Training.unity
     guid: 8885e40b86c9f42eb900261aa2c304c4
   - enabled: 1
